@@ -8,6 +8,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import static tw.edu.csie.ntut.littlemonster.MainActivity.bookKeeping;
+import static tw.edu.csie.ntut.littlemonster.MainActivity.type;
 
 public class RecordActivity extends AppCompatActivity {
 
@@ -18,9 +19,10 @@ public class RecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
         mList = (ListView)findViewById(R.id.listData);
-        Bundle bundle = getIntent().getExtras();
-        ArrayList<String> data = bookKeeping.GetData().get(0);
-//        ArrayList<String> data = bundle.getStringArrayList("0");
+        ArrayList<String> data = new ArrayList<String>();
+        for (int i = 0; i < bookKeeping.GetData().size(); i++) {
+            data.add(bookKeeping.GetData().get(i).get(0) + "/" + bookKeeping.GetData().get(i).get(1)  + "/" + bookKeeping.GetData().get(i).get(2) + "          " + type[bookKeeping.GetData().get(i).get(3)] + "          " + bookKeeping.GetData().get(i).get(4));
+        }
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
                 data);
