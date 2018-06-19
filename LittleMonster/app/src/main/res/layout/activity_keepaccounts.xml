@@ -14,6 +14,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="15pt"
         android:layout_marginTop="10dp"
+        android:background="@null"
+        android:scaleType="fitXY"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageButton
@@ -22,6 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/foodButton"
         android:layout_centerHorizontal="true"
+        android:background="@null"
+        android:scaleType="fitXY"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageButton
@@ -31,6 +35,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/foodButton"
         android:layout_marginRight="15pt"
+        android:background="@null"
+        android:scaleType="fitXY"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageButton
@@ -40,6 +46,8 @@
         android:layout_alignStart="@+id/foodButton"
         android:layout_below="@+id/foodButton"
         android:layout_marginTop="5pt"
+        android:background="@null"
+        android:scaleType="fitXY"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageButton
@@ -49,6 +57,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/moveButton"
         android:layout_marginRight="15pt"
+        android:background="@null"
+        android:scaleType="fitXY"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageButton
@@ -57,6 +67,8 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/moveButton"
         android:layout_centerHorizontal="true"
+        android:background="@null"
+        android:scaleType="fitXY"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageButton
@@ -66,6 +78,8 @@
         android:layout_alignStart="@+id/foodButton"
         android:layout_below="@+id/moveButton"
         android:layout_marginTop="5pt"
+        android:background="@null"
+        android:scaleType="fitXY"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
