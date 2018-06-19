@@ -38,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
     //Screen Size
     private  int screenWidth;
     private  int screenHeight;
+    private  int screenWidthHalf;
+    private  int screenHeightHalf;
+
+
+    private boolean moveState = false;
+    private String[] currentState = new String[]{"left","left","left","left","left","left","left"};
 
     MediaPlayer mediaPlayer;
     MediaPlayer poring;
@@ -78,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setImg();
 
+        bookKeeping= new BookKeeping();
+
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.peaceful_forest);
         touch = MediaPlayer.create(getApplicationContext(), R.raw.poring_damage);
         poring = MediaPlayer.create(getApplicationContext(), R.raw.monster_poring);
@@ -88,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
         disp.getSize(size);
         screenWidth = size.x;
         screenHeight = size.y;
+        screenWidthHalf = screenWidth/2;
+        screenHeightHalf = screenHeight/2;
 
         timer.schedule(new TimerTask() {
             @Override
@@ -119,6 +129,8 @@ public class MainActivity extends AppCompatActivity {
             //初始化圖片
             img[i] = (ImageView)findViewById(myImageIdList[i]);
             img[i].setImageResource(myImageList[i]);
+//            img[i].setX(screenWidthHalf);
+//            img[i].setY(screenHeightHalf);
             //重設ImageView大小
             int size = (int) (Math.random()*500)+150;
             resizeImageView(size,size,img[i]);
@@ -155,26 +167,67 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    //move slime position with random
     public void changePos(){
 
-        Down(0);
-        Up(1);
-        Left(2);
-        Right(3);
-        Up(4);
-        Left(5);
-        Right(6);
-//        View view = Activity.getCurrentFocus();
-//        view.animate().x(x).y(myImgY[0]).setDuration(0).start();
+        for (int i = 0;i < myImageList.length;i++)
+        {
+            Random rand = new Random();
+            int pos = rand.nextInt(4);
+            if (!moveState) {
+                switch (pos) {
+                    case 0:
+                        currentState[i] = "down";
+                        Down(i);
+                        break;
+                    case 1:
+                        currentState[i] = "up";
+                        Up(i);
+                        break;
+                    case 2:
+                        currentState[i] = "left";
+                        Left(i);
+                        break;
+                    case 3:
+                        currentState[i] = "right";
+                        Right(i);
+                        break;
+                    default:
+                        break;
+                }
+                moveState = true;
+            }
+            else
+            {
+                switch(currentState[i])
+                {
+                    case "up":
+                        Up(i);
+                        break;
+                    case "down":
+                        Down(i);
+                        break;
+                    case "left":
+                        Left(i);
+                        break;
+                    case "right":
+                        Right(i);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 
     public void Up(int i){
         //Up
         myImgY[i] -= 10;
-        if (img[i].getY() + img[i].getHeight() < 0){
+        if (img[i].getY()  < 0){
             poring.start();
             myImgX[i] = (float)Math.floor(Math.random()*(screenWidth - img[i].getWidth()));
             myImgY[i] = screenHeight + 100.0f;
+            moveState = false;
         }
         ObjectAnimator animX = ObjectAnimator.ofFloat(img[i], "x", myImgX[i]);
         ObjectAnimator animY = ObjectAnimator.ofFloat(img[i], "y",  myImgY[i]);
@@ -188,10 +241,11 @@ public class MainActivity extends AppCompatActivity {
     public void Down(int i){
         //Down
         myImgY[i] += 10;
-        if (img[i].getY() > screenHeight-500){
+        if (img[i].getY() + img[i].getHeight() > screenHeight-500){
             poring.start();
             myImgX[i]  = (float)Math.floor(Math.random()*(screenWidth - img[i].getWidth()));
             myImgY[i]  = -100.0f;
+            moveState = false;
         }
         ObjectAnimator animX = ObjectAnimator.ofFloat(img[i], "x", myImgX[i]);
         ObjectAnimator animY = ObjectAnimator.ofFloat(img[i], "y",  myImgY[i]);
@@ -206,10 +260,11 @@ public class MainActivity extends AppCompatActivity {
     public void Left(int i){
         //Left
         myImgX[i] -= 10;
-        if (img[i].getX() + img[i].getWidth() < 0){
+        if (img[i].getX() < 0){
             poring.start();
             myImgX[i] = screenWidth + 100.0f;
             myImgY[i]  = (float)Math.floor(Math.random()*(screenHeight - img[i].getHeight()));
+            moveState = false;
         }
         ObjectAnimator animX = ObjectAnimator.ofFloat(img[i], "x", myImgX[i]);
         ObjectAnimator animY = ObjectAnimator.ofFloat(img[i], "y",  myImgY[i]);
@@ -222,10 +277,11 @@ public class MainActivity extends AppCompatActivity {
     public void Right(int i){
         //Right
         myImgX[i] += 10;
-        if (img[i].getX() > screenHeight-500){
+        if (img[i].getX() + img[i].getWidth() > screenHeight-500){
             poring.start();
             myImgX[i] = -100.0f;
             myImgY[i]  = (float)Math.floor(Math.random()*(screenHeight - img[i].getHeight()));
+            moveState = false;
         }
         ObjectAnimator animX = ObjectAnimator.ofFloat(img[i], "x", myImgX[i]);
         ObjectAnimator animY = ObjectAnimator.ofFloat(img[i], "y",  myImgY[i]);
