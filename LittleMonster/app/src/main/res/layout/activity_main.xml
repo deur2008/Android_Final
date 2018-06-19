@@ -72,27 +72,28 @@
             android:weightSum="3">
 
             <ImageButton
-                android:id="@+id/Button1"
-                android:text="OK"
+                android:id="@+id/keepAccountsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="80px"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
                 android:background="@null"
-                android:src="@drawable/button" />
+                android:scaleType="fitXY"
+                android:src="@drawable/button"
+                android:text="OK" />
             <View
                 android:layout_width="700px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
+
             <ImageButton
-                android:id="@+id/Button12"
-                android:text="OK"
+                android:id="@+id/recordButton"
                 android:layout_width="wrap_content"
                 android:layout_height="80px"
                 android:layout_weight="1"
-                android:src="@drawable/button"
                 android:background="@null"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:src="@drawable/button"
+                android:text="OK" />
         </LinearLayout>
 
         <View

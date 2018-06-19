@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativeLayout">
+
+    <ImageButton
+        android:id="@+id/foodButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15pt"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageButton
+        android:id="@+id/clothesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/foodButton"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageButton
+        android:id="@+id/houseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/foodButton"
+        android:layout_marginRight="15pt"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageButton
+        android:id="@+id/moveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/foodButton"
+        android:layout_below="@+id/foodButton"
+        android:layout_marginTop="5pt"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageButton
+        android:id="@+id/amusementButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/moveButton"
+        android:layout_marginRight="15pt"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageButton
+        android:id="@+id/educationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/moveButton"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageButton
+        android:id="@+id/incomeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/foodButton"
+        android:layout_below="@+id/moveButton"
+        android:layout_marginTop="5pt"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/feedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/foodButton"
+        android:layout_below="@+id/incomeButton"
+        android:layout_marginTop="10pt"
+        android:text="餵食寵物: "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/amountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/foodButton"
+        android:layout_below="@+id/dateTextView"
+        android:layout_marginTop="15pt"
+        android:text="金額: "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/foodButton"
+        android:layout_below="@+id/feedTextView"
+        android:layout_marginTop="15pt"
+        android:text="日期: "
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/amountEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/amountTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="45dp"
+        android:layout_marginLeft="10pt"
+        android:layout_marginRight="20pt"
+        android:ems="10"
+        android:inputType="none|number|numberSigned" />
+
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10pt"
+        android:text="確定"
+        android:textSize="10pt" />
+
+    <Spinner
+        android:id="@+id/yearSpinner"
+        android:layout_width="107dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/dateTextView"
+        android:layout_toEndOf="@+id/amountTextView" />
+
+    <Spinner
+        android:id="@+id/monthSpinner"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/dateTextView"
+        android:layout_toEndOf="@+id/yearSpinner" />
+
+    <Spinner
+        android:id="@+id/dateSpinner"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/dateTextView"
+        android:layout_toEndOf="@+id/monthSpinner" />
+
+</RelativeLayout>

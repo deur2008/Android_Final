@@ -3,6 +3,7 @@ package tw.edu.csie.ntut.littlemonster;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
@@ -18,6 +19,8 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -31,6 +34,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+    public static BookKeeping bookKeeping;
     //Screen Size
     private  int screenWidth;
     private  int screenHeight;
@@ -66,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     //Initialize Class
     private Handler handler = new Handler();
     private Timer timer = new Timer();
+    private ImageButton keepAccountsBtn, recordBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer.start();
         mediaPlayer.setLooping(true);
 
+        keepAccountsBtn = (ImageButton) findViewById(R.id.keepAccountsButton);
+        keepAccountsBtn.setOnClickListener(btnKeepAccountsOnClick);
+        recordBtn = (ImageButton) findViewById(R.id.recordButton);
+        recordBtn.setOnClickListener(btnRecordOnClick);
     }
 
     private void setImg(){
@@ -226,4 +235,20 @@ public class MainActivity extends AppCompatActivity {
 //        img[i].setX(myImgX[i]);
 //        img[i].setY(myImgY[i]);
     }
+
+    private View.OnClickListener btnKeepAccountsOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent it = new Intent();
+            it.setClass(MainActivity.this, KeepAccountsActivity.class);
+            startActivity(it);
+        }
+    };
+
+    private View.OnClickListener btnRecordOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent it = new Intent();
+            it.setClass(MainActivity.this, RecordActivity.class);
+            startActivity(it);
+        }
+    };
 }
