@@ -14,16 +14,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import static tw.edu.csie.ntut.littlemonster.MainActivity.bookKeeping;
+import static tw.edu.csie.ntut.littlemonster.MainActivity.type;
 
 
 public class KeepAccountsActivity extends AppCompatActivity {
 
     private ImageButton foodBtn, clothesBtn, houseBtn, moveBtn, educationBtn, amusementBtn, incomeBtn;
     private TextView feedTxt;
-    private Spinner yearSpn, monthSpn, dateSpn;
+    private Spinner yearSpn, monthSpn, daySpn;
     private EditText amountEdit;
     private Button confirmBtn;
-    private String feedType;
+    private int feedType;
 //    private BookKeeping bookKeeping;
     private Time now = new Time();
 
@@ -51,7 +52,7 @@ public class KeepAccountsActivity extends AppCompatActivity {
         feedTxt = (TextView) findViewById(R.id.feedTextView);
         yearSpn = (Spinner) findViewById(R.id.yearSpinner);
         monthSpn = (Spinner) findViewById(R.id.monthSpinner);
-        dateSpn = (Spinner) findViewById(R.id.dateSpinner);
+        daySpn = (Spinner) findViewById(R.id.dateSpinner);
         amountEdit = (EditText) findViewById(R.id.amountEditText);
         confirmBtn = (Button) findViewById(R.id.confirmButton);
         confirmBtn.setOnClickListener(btnConfirmOnClick);
@@ -120,62 +121,62 @@ public class KeepAccountsActivity extends AppCompatActivity {
 
     private View.OnClickListener btnFoodOnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            feedType = "食";
-            feedTxt.setText("餵食寵物: " + feedType);
+            SetType(1);
         }
     };
 
     private View.OnClickListener btnClothesOnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            feedType = "衣";
-            feedTxt.setText("餵食寵物: " + feedType);
+            SetType(2);
         }
     };
 
     private View.OnClickListener btnHouseOnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            feedType = "住";
-            feedTxt.setText("餵食寵物: " + feedType);
+            SetType(3);
         }
     };
 
     private View.OnClickListener btnMoveOnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            feedType = "行";
-            feedTxt.setText("餵食寵物: " + feedType);
+            SetType(4);
         }
     };
 
     private View.OnClickListener btnEducationOnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            feedType = "育";
-            feedTxt.setText("餵食寵物: " + feedType);
+            SetType(5);
         }
     };
 
     private View.OnClickListener btnAmusementOnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            feedType = "樂";
-            feedTxt.setText("餵食寵物: " + feedType);
+            SetType(6);
         }
     };
 
     private View.OnClickListener btnIncomeOnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            feedType = "收入";
-            feedTxt.setText("餵食寵物: " + feedType);
+            SetType(0);
         }
     };
 
+    private void SetType(int setType) {
+        feedType = setType;
+        feedTxt.setText("餵食寵物: " + type[setType]);
+    }
+
     private View.OnClickListener btnConfirmOnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            String date = yearSpn.getSelectedItem().toString() + "/" + monthSpn.getSelectedItem().toString() + "/" + dateSpn.getSelectedItem().toString();
-            String amount = amountEdit.getText().toString();
-            if (amount == "" || Integer.parseInt(amount) <= 0) {
+            int year = Integer.parseInt(yearSpn.getSelectedItem().toString());
+            int month = Integer.parseInt(monthSpn.getSelectedItem().toString());
+            int day = Integer.parseInt(daySpn.getSelectedItem().toString());
+            int amount = Integer.parseInt(amountEdit.getText().toString());
+            if (amount <= 0) {
                 Toast.makeText(KeepAccountsActivity.this, "金額輸入錯誤!!", Toast.LENGTH_LONG).show();
             }
             else {
-                bookKeeping.AddData(date, feedType, amount);
+                bookKeeping.AddData(year, month, day, feedType, amount);
                 amountEdit.setText("");
             }
         }
@@ -187,9 +188,9 @@ public class KeepAccountsActivity extends AppCompatActivity {
             dates[i] = Integer.toString(i + 1);
         }
         ArrayAdapter<String> aaDate = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dates);
-        dateSpn.setAdapter(aaDate);
+        daySpn.setAdapter(aaDate);
         if (max >= now.monthDay) {
-            dateSpn.setSelection(now.monthDay - 1);
+            daySpn.setSelection(now.monthDay - 1);
         }
     }
 }

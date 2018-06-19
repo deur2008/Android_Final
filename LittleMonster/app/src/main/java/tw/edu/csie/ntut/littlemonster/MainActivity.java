@@ -35,6 +35,9 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     public static BookKeeping bookKeeping;
+    public static String[] type = new String[] {
+            "收入","食","衣","住","行","育","樂"
+    };
     //Screen Size
     private  int screenWidth;
     private  int screenHeight;
@@ -84,8 +87,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setImg();
 
+<<<<<<< HEAD
         bookKeeping= new BookKeeping();
 
+=======
+        bookKeeping = new BookKeeping();
+>>>>>>> 7b34408d935ce5d4ae6a80435453f80127eed771
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.peaceful_forest);
         touch = MediaPlayer.create(getApplicationContext(), R.raw.poring_damage);
         poring = MediaPlayer.create(getApplicationContext(), R.raw.monster_poring);
