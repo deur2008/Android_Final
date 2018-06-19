@@ -176,6 +176,7 @@ public class KeepAccountsActivity extends AppCompatActivity {
                 Toast.makeText(KeepAccountsActivity.this, "金額輸入錯誤!!", Toast.LENGTH_LONG).show();
             }
             else {
+                Toast.makeText(KeepAccountsActivity.this, "餵食 " + type[feedType] + " 成功~\n您共花費了 $" + amount, Toast.LENGTH_LONG).show();
                 bookKeeping.AddData(year, month, day, feedType, amount);
                 amountEdit.setText("");
             }

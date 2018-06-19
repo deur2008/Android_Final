@@ -21,7 +21,23 @@ public class RecordActivity extends AppCompatActivity {
         mList = (ListView)findViewById(R.id.listData);
         ArrayList<String> data = new ArrayList<String>();
         for (int i = 0; i < bookKeeping.GetData().size(); i++) {
-            data.add(bookKeeping.GetData().get(i).get(0) + "/" + bookKeeping.GetData().get(i).get(1)  + "/" + bookKeeping.GetData().get(i).get(2) + "          " + type[bookKeeping.GetData().get(i).get(3)] + "          " + bookKeeping.GetData().get(i).get(4));
+            String date = bookKeeping.GetData().get(i).get(0).toString();
+            if (bookKeeping.GetData().get(i).get(1) < 10) {
+                date += "/0" + bookKeeping.GetData().get(i).get(1);
+            }
+            else{
+                date += "/" + bookKeeping.GetData().get(i).get(1);
+            }
+            if (bookKeeping.GetData().get(i).get(2) < 10) {
+                date += "/0" + bookKeeping.GetData().get(i).get(2);
+            }
+            else{
+                date += "/" + bookKeeping.GetData().get(i).get(2);
+            }
+            if (bookKeeping.GetData().get(i).get(3) == 0)
+                data.add(date + "          " + type[bookKeeping.GetData().get(i).get(3)] + "          $" + bookKeeping.GetData().get(i).get(4));
+            else
+                data.add(date + "          " + type[bookKeeping.GetData().get(i).get(3)] + "             $" + bookKeeping.GetData().get(i).get(4));
         }
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
