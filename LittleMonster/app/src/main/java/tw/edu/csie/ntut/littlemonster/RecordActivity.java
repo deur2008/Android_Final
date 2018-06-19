@@ -6,8 +6,11 @@ import android.text.format.Time;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -21,11 +24,15 @@ public class RecordActivity extends AppCompatActivity {
     private int year, month;
     private Time now = new Time();
     private ImageButton lastBtn, nextBtn;
+    private ImageView background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
+//        background= (ImageView)findViewById(R.id.background);
+//        background.setImageResource(R.drawable.background);
+//        Glide.with(this).load(R.drawable.background).into(background);
         now.setToNow();
         lastBtn = (ImageButton) findViewById(R.id.lastButton);
         lastBtn.setOnClickListener(btnLastOnClick);
