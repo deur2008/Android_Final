@@ -9,9 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import static tw.edu.csie.ntut.littlemonster.MainActivity.bookKeeping;
 import static tw.edu.csie.ntut.littlemonster.MainActivity.type;
@@ -56,7 +59,7 @@ public class KeepAccountsActivity extends AppCompatActivity {
         amountEdit = (EditText) findViewById(R.id.amountEditText);
         confirmBtn = (Button) findViewById(R.id.confirmButton);
         confirmBtn.setOnClickListener(btnConfirmOnClick);
-
+        setImg();
         setDates(31);
         String[] years = new String[30];
         for (int i = 0; i < 30; i++) {
@@ -193,4 +196,29 @@ public class KeepAccountsActivity extends AppCompatActivity {
             daySpn.setSelection(now.monthDay - 1);
         }
     }
+
+    private void setImg(){
+
+        foodBtn.setImageResource(R.drawable.slime01);
+        Glide.with(this).load(R.drawable.slime01).into(foodBtn);
+
+        clothesBtn.setImageResource(R.drawable.slime02);
+        Glide.with(this).load(R.drawable.slime02).into(clothesBtn);
+
+        houseBtn.setImageResource(R.drawable.slime03);
+        Glide.with(this).load(R.drawable.slime03).into(houseBtn);
+
+        moveBtn.setImageResource(R.drawable.slime04);
+        Glide.with(this).load(R.drawable.slime04).into(moveBtn);
+
+        educationBtn.setImageResource(R.drawable.slime05);
+        Glide.with(this).load(R.drawable.slime05).into(educationBtn);
+
+        amusementBtn.setImageResource(R.drawable.slime06);
+        Glide.with(this).load(R.drawable.slime06).into(amusementBtn);
+
+        incomeBtn.setImageResource(R.drawable.slime07);
+        Glide.with(this).load(R.drawable.slime07).into(incomeBtn);
+    }
+
 }
