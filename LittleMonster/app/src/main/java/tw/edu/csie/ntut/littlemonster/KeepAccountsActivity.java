@@ -23,6 +23,7 @@ import static tw.edu.csie.ntut.littlemonster.MainActivity.type;
 public class KeepAccountsActivity extends AppCompatActivity {
 
     private ImageButton foodBtn, clothesBtn, houseBtn, moveBtn, educationBtn, amusementBtn, incomeBtn;
+    private ImageView background;
     private TextView feedTxt;
     private Spinner yearSpn, monthSpn, daySpn;
     private EditText amountEdit;
@@ -198,6 +199,9 @@ public class KeepAccountsActivity extends AppCompatActivity {
     }
 
     private void setImg(){
+        background= (ImageView)findViewById(R.id.background);
+        background.setImageResource(R.drawable.bg);
+        Glide.with(this).load(R.drawable.bg).into(background);
 
         foodBtn.setImageResource(R.drawable.slime01);
         Glide.with(this).load(R.drawable.slime01).into(foodBtn);
