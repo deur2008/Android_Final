@@ -61,7 +61,6 @@ public class KeepAccountsActivity extends AppCompatActivity {
         confirmBtn = (Button) findViewById(R.id.confirmButton);
         confirmBtn.setOnClickListener(btnConfirmOnClick);
         setImg();
-        setDates(31);
         String[] years = new String[30];
         for (int i = 0; i < 30; i++) {
             years[i] = Integer.toString(2018 - i);
@@ -194,9 +193,10 @@ public class KeepAccountsActivity extends AppCompatActivity {
         }
         ArrayAdapter<String> aaDate = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dates);
         daySpn.setAdapter(aaDate);
-        if (max >= now.monthDay) {
+        if (max >= now.monthDay)
             daySpn.setSelection(now.monthDay - 1);
-        }
+        else
+            daySpn.setSelection(0);
     }
 
     private void setImg(){
