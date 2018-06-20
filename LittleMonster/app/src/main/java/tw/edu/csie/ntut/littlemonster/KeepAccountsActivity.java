@@ -23,6 +23,7 @@ import static tw.edu.csie.ntut.littlemonster.MainActivity.type;
 public class KeepAccountsActivity extends AppCompatActivity {
 
     private ImageButton foodBtn, clothesBtn, houseBtn, moveBtn, educationBtn, amusementBtn, incomeBtn;
+    private ImageView background;
     private TextView feedTxt;
     private Spinner yearSpn, monthSpn, daySpn;
     private EditText amountEdit;
@@ -199,27 +200,30 @@ public class KeepAccountsActivity extends AppCompatActivity {
     }
 
     private void setImg(){
+        background= (ImageView)findViewById(R.id.background);
+        background.setImageResource(R.drawable.bg);
+        Glide.with(this).load(R.drawable.bg).into(background);
 
-        foodBtn.setImageResource(R.drawable.slime01);
-        Glide.with(this).load(R.drawable.slime01).into(foodBtn);
+        foodBtn.setImageResource(R.drawable.slime02);
+        Glide.with(this).load(R.drawable.slime02).into(foodBtn);
 
-        clothesBtn.setImageResource(R.drawable.slime02);
-        Glide.with(this).load(R.drawable.slime02).into(clothesBtn);
+        clothesBtn.setImageResource(R.drawable.slime03);
+        Glide.with(this).load(R.drawable.slime03).into(clothesBtn);
 
-        houseBtn.setImageResource(R.drawable.slime03);
-        Glide.with(this).load(R.drawable.slime03).into(houseBtn);
+        houseBtn.setImageResource(R.drawable.slime04);
+        Glide.with(this).load(R.drawable.slime04).into(houseBtn);
 
-        moveBtn.setImageResource(R.drawable.slime04);
-        Glide.with(this).load(R.drawable.slime04).into(moveBtn);
+        moveBtn.setImageResource(R.drawable.slime05);
+        Glide.with(this).load(R.drawable.slime05).into(moveBtn);
 
-        educationBtn.setImageResource(R.drawable.slime05);
-        Glide.with(this).load(R.drawable.slime05).into(educationBtn);
+        educationBtn.setImageResource(R.drawable.slime06);
+        Glide.with(this).load(R.drawable.slime06).into(educationBtn);
 
-        amusementBtn.setImageResource(R.drawable.slime06);
-        Glide.with(this).load(R.drawable.slime06).into(amusementBtn);
+        amusementBtn.setImageResource(R.drawable.slime07);
+        Glide.with(this).load(R.drawable.slime07).into(amusementBtn);
 
-        incomeBtn.setImageResource(R.drawable.slime07);
-        Glide.with(this).load(R.drawable.slime07).into(incomeBtn);
+        incomeBtn.setImageResource(R.drawable.slime01);
+        Glide.with(this).load(R.drawable.slime01).into(incomeBtn);
     }
 
 }
