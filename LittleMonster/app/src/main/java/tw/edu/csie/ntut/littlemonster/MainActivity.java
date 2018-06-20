@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean moveState = false;
     private boolean isTouch = false;
-    private String[] currentState = new String[]{"right","right","right","right","right","right","right"};
+    private String[] currentState = new String[]{"left","left","left","left","left","left","left"};
 
     MediaPlayer mediaPlayer;
     MediaPlayer poring;
@@ -376,23 +376,34 @@ public class MainActivity extends AppCompatActivity {
 
     private void initListDialog(View show,boolean position,int currentType)
     {
-        String text[] = new String[]{"項目","金額"};
-        final List<Map<String, String>> list = new ArrayList<>();
+        String text[] = new String[]{"項目 ","金額 "};
+         List<Map<String, String>> list = new ArrayList<>();
 
 
 
+        Map<String, String> type = new HashMap<>();
+        type.put("text", text[0]+ getTouchID(currentType,0));
+        list.add(type);
+        Map<String, String> balance = new HashMap<>();
+        balance.put("text", text[1] + getTouchID(currentType,1));
+        list.add(balance);
+//        list.add(map);
+//        for (int i = 0; i < 2; i++)
+//        {
+//            Map<String, String> map = new HashMap<>();
+//            map.put("text", i+1+"."+text[i] + " "+ getTouchID(currentType,i));
+//            list.add(map);
+//            //adapter.notifyDataSetChanged();
+//            int mapStr = map.get("text").length();
+//            Log.e("map",String.valueOf(mapStr));
+//            list.get()
+//            Log.e("map",map.get("text"));
+//        }
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_view, null);
         ListView mListView = view.findViewById(R.id.listView);
         final SimpleAdapter adapter = new SimpleAdapter(this, list, android.R.layout.simple_list_item_1, new String[]{"text"}, new int[]{android.R.id.text1});
         mListView.setAdapter(adapter);
 
-        for (int i = 0; i < 2; i++)
-        {
-            Map<String, String> map = new HashMap<>();
-            map.put("text", text[i] + "   "+ getTouchID(currentType,i));
-            list.add(map);
-            adapter.notifyDataSetChanged();
-        }
         if(position) {
             bubble = new BubbleDialog(this)
                     .addContentView(view)
@@ -423,7 +434,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else if(work==1) {
-            text = String.valueOf(bookKeeping.GetTypeBalance(id));
+            Random rd = new Random();
+
+            int answer = rd.nextInt(10) + 1;
+            text = String.valueOf((answer));
         }
         return text;
     }
