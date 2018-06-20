@@ -7,7 +7,7 @@
     android:id="@+id/relativeLayout">
     <ImageView
         android:id="@+id/background"
-        style="@style/BGImageView"
+        style="@style/BGImageView50"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
@@ -98,7 +98,6 @@
         android:layout_below="@+id/incomeButton"
         android:layout_marginTop="10pt"
         android:text="餵食寵物: "
-        android:textColor="@android:color/white"
         android:textSize="20dp" />
 
     <TextView
@@ -109,7 +108,6 @@
         android:layout_below="@+id/dateTextView"
         android:layout_marginTop="15pt"
         android:text="金額: "
-        android:textColor="@android:color/white"
         android:textSize="20dp" />
 
     <TextView
@@ -120,7 +118,6 @@
         android:layout_below="@+id/feedTextView"
         android:layout_marginTop="15pt"
         android:text="日期: "
-        android:textColor="@android:color/white"
         android:textSize="20dp" />
 
     <EditText
@@ -133,8 +130,7 @@
         android:layout_marginLeft="10pt"
         android:layout_marginRight="20pt"
         android:ems="10"
-        android:inputType="none|number|numberSigned"
-        android:textColor="@android:color/white" />
+        android:inputType="none|number|numberSigned" />
 
     <Button
         android:id="@+id/confirmButton"

@@ -25,24 +25,18 @@ public class RecordActivity extends AppCompatActivity {
     private int year, month;
     private Time now = new Time();
     private ImageButton lastBtn, nextBtn;
-<<<<<<< HEAD
     private Button detailBtn, performanceBtn;
     private Boolean isDetail;
-=======
-    private ImageView background;
->>>>>>> 85ef22366907a2bfe0a15ca05b36cd5c3c625592
+//    private ImageView background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
-<<<<<<< HEAD
         isDetail = true;
-=======
 //        background= (ImageView)findViewById(R.id.background);
 //        background.setImageResource(R.drawable.background);
 //        Glide.with(this).load(R.drawable.background).into(background);
->>>>>>> 85ef22366907a2bfe0a15ca05b36cd5c3c625592
         now.setToNow();
         lastBtn = (ImageButton) findViewById(R.id.lastButton);
         lastBtn.setOnClickListener(btnLastOnClick);
