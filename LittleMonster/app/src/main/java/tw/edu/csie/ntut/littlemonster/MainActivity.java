@@ -120,22 +120,23 @@ public class MainActivity extends AppCompatActivity {
         screenHeightHalf = screenHeight/2;
 
         //30毫秒移動
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        changePos();
-                        for (int i = 0;i < myImageList.length;i++) {
-                            int size = 100 + bookKeeping.GetTypeBalance(i);
-                            resizeImageView(size, size, img[i]);
+        if(!isTouch){
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            changePos();
+                            for (int i = 0;i < myImageList.length;i++) {
+                                int size = 100 + bookKeeping.GetTypeBalance(i);
+                                resizeImageView(size, size, img[i]);
+                            }
                         }
-                    }
-                });
-            }
-        },0,50);
-
+                    });
+                }
+            },0,50);
+        }
         //背景音樂
         mediaPlayer.start();
         mediaPlayer.setLooping(true);
@@ -374,31 +375,18 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
+    //氣泡
     private void initListDialog(View show,boolean position,int currentType)
     {
-        String text[] = new String[]{"項目 ","金額 "};
+        String text[] = new String[]{"寵物：","金額："};
          List<Map<String, String>> list = new ArrayList<>();
 
-
-
-        Map<String, String> type = new HashMap<>();
-        type.put("text", text[0]+ getTouchID(currentType,0));
-        list.add(type);
-        Map<String, String> balance = new HashMap<>();
-        balance.put("text", text[1] + getTouchID(currentType,1));
-        list.add(balance);
-//        list.add(map);
-//        for (int i = 0; i < 2; i++)
-//        {
-//            Map<String, String> map = new HashMap<>();
-//            map.put("text", i+1+"."+text[i] + " "+ getTouchID(currentType,i));
-//            list.add(map);
-//            //adapter.notifyDataSetChanged();
-//            int mapStr = map.get("text").length();
-//            Log.e("map",String.valueOf(mapStr));
-//            list.get()
-//            Log.e("map",map.get("text"));
-//        }
+        for (int i = 0; i < 2; i++)
+        {
+            Map<String, String> map = new HashMap<>();
+            map.put("text", i+1+"."+text[i] + " "+ getTouchID(currentType,i));
+            list.add(map);
+        }
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_view, null);
         ListView mListView = view.findViewById(R.id.listView);
         final SimpleAdapter adapter = new SimpleAdapter(this, list, android.R.layout.simple_list_item_1, new String[]{"text"}, new int[]{android.R.id.text1});
@@ -424,20 +412,18 @@ public class MainActivity extends AppCompatActivity {
 //                .setClickedView(view).setPosition(BOTTOM).setOffsetY(8).calBar(true);
         bubble.show();
     }
-
+    //id取得ImgID，work：0回傳寵物屬性、1回傳金額
     private String getTouchID(int id,int work){
         String text="";
-        if(work==0){
-            for (int i = 0;i < myImageList.length;i++) {
-                if (id == myImageIdList[i])
-                    text = type[i];
+        for (int i = 0;i < myImageList.length;i++) {
+            if (id == myImageIdList[i]){
+                if (work == 0) {
+                        text = type[i];
+                }
+                else if (work == 1) {;
+                    text = String.valueOf(bookKeeping.GetTypeBalance(i)+"元");
+                }
             }
-        }
-        else if(work==1) {
-            Random rd = new Random();
-
-            int answer = rd.nextInt(10) + 1;
-            text = String.valueOf((answer));
         }
         return text;
     }

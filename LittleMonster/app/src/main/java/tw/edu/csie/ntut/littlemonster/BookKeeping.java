@@ -38,7 +38,7 @@ public class BookKeeping {
         return balance;
     }
 
-    public int GetTypeBalance(int type) {
+        public int GetTypeBalance(int type) {
         return GetTypeBalance(now.year, now.month + 1, type);
     }
 
