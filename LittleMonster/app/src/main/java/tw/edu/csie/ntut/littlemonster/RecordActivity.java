@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.format.Time;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,32 +22,41 @@ public class RecordActivity extends AppCompatActivity {
     private int year, month;
     private Time now = new Time();
     private ImageButton lastBtn, nextBtn;
+    private Button detailBtn, performanceBtn;
+    private Boolean isDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
+        isDetail = true;
         now.setToNow();
         lastBtn = (ImageButton) findViewById(R.id.lastButton);
         lastBtn.setOnClickListener(btnLastOnClick);
         nextBtn = (ImageButton) findViewById(R.id.nextButton);
         nextBtn.setOnClickListener(btnNextOnClick);
         monthTxt = (TextView) findViewById(R.id.monthText);
+        detailBtn = (Button) findViewById(R.id.detailButton);
+        detailBtn.setOnClickListener(btnDetailOnClick);
+        detailBtn.setEnabled(false);
+        performanceBtn = (Button) findViewById(R.id.perfomanceButton);
+        performanceBtn.setOnClickListener(btnPerpomanceOnClick);
         mList = (ListView)findViewById(R.id.listData);
-        SetMonth(now.year, now.month);
-        SetList();
+        SetMonth(now.year, now.month + 1);
+        SetDetailList();
     }
 
     private void SetMonth(int setYear, int setMonth) {
         year = setYear;
         month = setMonth;
-        monthTxt.setText(year + "\n" + (month + 1) + "月");
+        monthTxt.setText(year + "\n" + (month) + "月");
     }
 
-    private void SetList() {
+    private void SetDetailList() {
         ArrayList<String> data = new ArrayList<String>();
+        data.add("日期                     寵物           花費");
         for (int i = 0; i < bookKeeping.GetData().size(); i++) {
-            if (bookKeeping.GetData().get(i).get(0) == year && bookKeeping.GetData().get(i).get(1) == month + 1) {
+            if (bookKeeping.GetData().get(i).get(0) == year && bookKeeping.GetData().get(i).get(1) == month) {
                 String date = bookKeeping.GetData().get(i).get(0).toString();
                 if (bookKeeping.GetData().get(i).get(1) < 10) {
                     date += "/0" + bookKeeping.GetData().get(i).get(1);
@@ -70,29 +80,70 @@ public class RecordActivity extends AppCompatActivity {
         mList.setAdapter(adapter);
     }
 
+    private void SetPerfomanceList() {
+        ArrayList<String> data = new ArrayList<String>();
+        data.add("寵物               總計");
+        data.add(type[0] + "              $" + bookKeeping.GetTypeBalance(year, month, 0));
+        for (int i = 1; i < 7; i++) {
+            data.add(type[i] + "                  $" + bookKeeping.GetTypeBalance(year, month, i));
+        }
+        data.add("");
+        data.add("收入 - 其他    $" + bookKeeping.GetBalance(year, month));
+        ArrayAdapter adapter = new ArrayAdapter(this,
+                android.R.layout.simple_list_item_1,
+                data);
+        mList.setAdapter(adapter);
+    }
+
     private View.OnClickListener btnLastOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            month--;
-            if (month <= 0) {
-                month = 12;
-                year--;
-            }
-            monthTxt.setText(year + "\n" + (month + 1) + "月");
-            SetList();
+            if (month == 1)
+                SetMonth(year - 1, 12);
+            else
+                SetMonth(year, month - 1);
+            if (isDetail)
+                SetDetailList();
+            else
+                SetPerfomanceList();
         }
     };
 
     private View.OnClickListener btnNextOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            month++;
-            if (month >= 13) {
-                month = 1;
-                year++;
-            }
-            monthTxt.setText(year + "\n" + (month + 1) + "月");
-            SetList();
+            if (month == 12)
+                SetMonth(year + 1, 1);
+            else
+                SetMonth(year, month + 1);
+            if (isDetail)
+                SetDetailList();
+            else
+                SetPerfomanceList();
         }
     };
+
+    private View.OnClickListener btnDetailOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            SetIsDetail(true);
+        }
+    };
+
+    private View.OnClickListener btnPerpomanceOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            SetIsDetail(false);
+        }
+    };
+
+    private void SetIsDetail(boolean isD) {
+        isDetail = isD;
+        if (isD)
+            SetDetailList();
+        else
+            SetPerfomanceList();
+        detailBtn.setEnabled(!isDetail);
+        performanceBtn.setEnabled(isDetail);
+    }
 }
