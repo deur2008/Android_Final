@@ -1,9 +1,11 @@
 package tw.edu.csie.ntut.littlemonster;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.Time;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -28,7 +30,6 @@ public class RecordActivity extends AppCompatActivity {
     private ImageButton lastBtn, nextBtn;
     private Button detailBtn, performanceBtn;
     private Boolean isDetail;
-    private ImageView background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class RecordActivity extends AppCompatActivity {
         mList = (ListView)findViewById(R.id.listData);
         SetMonth(now.year, now.month + 1);
         SetDetailList();
-        setImg();
+        //setImg();
     }
 
     private void SetMonth(int setYear, int setMonth) {
@@ -85,7 +86,20 @@ public class RecordActivity extends AppCompatActivity {
         }
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
-                data);
+                data){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view =super.getView(position, convertView, parent);
+
+                TextView textView=(TextView) view.findViewById(android.R.id.text1);
+
+                /*YOUR CHOICE OF COLOR*/
+                textView.setTextColor(getResources().getColor(R.color.boardColor));
+
+                return view;
+            }
+        };;
+
         mList.setAdapter(adapter);
     }
 
@@ -100,7 +114,20 @@ public class RecordActivity extends AppCompatActivity {
         data.add("收入 - 其他    $" + bookKeeping.GetBalance(year, month));
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
-                data);
+                data){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view =super.getView(position, convertView, parent);
+
+                TextView textView=(TextView) view.findViewById(android.R.id.text1);
+
+                /*YOUR CHOICE OF COLOR*/
+                textView.setTextColor(getResources().getColor(R.color.boardColor));
+
+                return view;
+            }
+        };
+        ;
         mList.setAdapter(adapter);
     }
 
@@ -157,8 +184,8 @@ public class RecordActivity extends AppCompatActivity {
     }
 
 
-    private void setImg(){
-        background= (ImageView)findViewById(R.id.background);
-        background.setImageResource(R.drawable.background);
-        Glide.with(this).load(R.drawable.background).into(background);}
+//    private void setImg(){
+//        background= (ImageView)findViewById(R.id.background);
+//        background.setImageResource(R.drawable.background);
+//        Glide.with(this).load(R.drawable.background).into(background);}
 }

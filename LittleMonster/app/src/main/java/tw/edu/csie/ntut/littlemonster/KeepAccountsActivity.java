@@ -59,6 +59,7 @@ public class KeepAccountsActivity extends AppCompatActivity {
         daySpn = (Spinner) findViewById(R.id.dateSpinner);
         amountEdit = (EditText) findViewById(R.id.amountEditText);
         confirmBtn = (ImageButton) findViewById(R.id.confirmButton);
+        confirmBtn.setOnClickListener(btnConfirmOnClick);
         backBtn = (ImageButton) findViewById(R.id.backButton);
         backBtn.setOnClickListener(btnBackOnClick);
         setImg();

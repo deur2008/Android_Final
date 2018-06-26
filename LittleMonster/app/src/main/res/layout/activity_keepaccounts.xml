@@ -164,7 +164,7 @@
 
     <Spinner
         android:id="@+id/monthSpinner"
-        android:layout_width="80dp"
+        android:layout_width="95dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/dateTextView"
         android:layout_toEndOf="@+id/yearSpinner" />

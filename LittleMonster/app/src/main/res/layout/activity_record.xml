@@ -7,11 +7,11 @@
 
     <ImageView
         android:id="@+id/background"
-        style="@style/BGImageView30"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/listbg"
         tools:ignore="ContentDescription" />
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +40,9 @@
             android:layout_weight="1"
             android:text="month"
             android:textAlignment="center"
-            android:textSize="14pt" />
+            android:background="@drawable/signboard"
+            android:textSize="14pt"
+            android:textColor="@color/signColor"/>
 
         <ImageButton
             android:id="@+id/nextButton"
@@ -60,23 +62,28 @@
         <Button
             android:id="@+id/detailButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="本月紀錄" />
+            android:background="@drawable/sign"
+            android:text="本月紀錄"
+            android:textColor="@color/signColor"/>
 
         <Button
             android:id="@+id/perfomanceButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="餵食統計" />
+            android:background="@drawable/sign"
+            android:text="餵食統計"
+            android:textColor="@color/signColor"/>
     </LinearLayout>
 
     <ListView
         android:id="@+id/listData"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10pt" />
+        android:layout_marginTop="10pt"
+        />
 
 </LinearLayout>
 </RelativeLayout>
