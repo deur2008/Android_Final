@@ -17,8 +17,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import static tw.edu.csie.ntut.littlemonster.MainActivity.bookKeeping;
-import static tw.edu.csie.ntut.littlemonster.MainActivity.type;
+import static tw.edu.csie.ntut.littlemonster.SplashActivity.bookKeeping;
+import static tw.edu.csie.ntut.littlemonster.SplashActivity.type;
 
 public class RecordActivity extends AppCompatActivity {
 
