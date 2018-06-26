@@ -49,7 +49,7 @@ public class RecordActivity extends AppCompatActivity {
         detailBtn.setOnClickListener(btnDetailOnClick);
         detailBtn.setEnabled(false);
         performanceBtn = (Button) findViewById(R.id.perfomanceButton);
-        performanceBtn.setOnClickListener(btnPerpomanceOnClick);
+        performanceBtn.setOnClickListener(btnPerfomanceOnClick);
         mList = (ListView)findViewById(R.id.listData);
         SetMonth(now.year, now.month + 1);
         SetDetailList();
@@ -166,7 +166,7 @@ public class RecordActivity extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener btnPerpomanceOnClick = new View.OnClickListener() {
+    private View.OnClickListener btnPerfomanceOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             SetIsDetail(false);
