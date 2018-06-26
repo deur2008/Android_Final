@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.xujiaji.happybubble.BubbleDialog;
@@ -45,6 +46,7 @@ public class SplashActivity extends AppCompatActivity {
     //Screen Size
     private  int screenWidth;
     private  int screenHeight;
+    private Boolean exit = false;
 
 
     private boolean moveState = false;
@@ -197,7 +199,23 @@ public class SplashActivity extends AppCompatActivity {
             return true;
         }
     };
+    public void onBackPressed() {
+        if (exit) {
+            finish(); // finish activity
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
 
+        }
+
+    }
     //move slime position with random
     public void changePos(){
 
