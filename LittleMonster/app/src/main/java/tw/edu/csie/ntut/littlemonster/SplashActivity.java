@@ -206,8 +206,6 @@ public class SplashActivity extends AppCompatActivity {
                     touch.start();
                     xCoOrdinate = view.getX() - event.getRawX();
                     yCoOrdinate = view.getY() - event.getRawY();
-                    Log.e("address", String.valueOf(xCoOrdinate) + "~~" + String.valueOf(yCoOrdinate)); // 記錄目前位置
-                    //設定圖像被點擊並顯示氣泡
                     isTouch = true;
                     if( view.getY()>500){
 
@@ -219,9 +217,7 @@ public class SplashActivity extends AppCompatActivity {
                     bubble.show();
                     break;
                 case MotionEvent.ACTION_MOVE:
-
                     view.animate().x(event.getRawX() + xCoOrdinate).y(event.getRawY() + yCoOrdinate).setDuration(0).start();
-                    Log.e("address", String.valueOf(xCoOrdinate) + "~~" + String.valueOf(yCoOrdinate)); // 記錄目前位置
                     break;
                 case MotionEvent.ACTION_UP:
                     isTouch = false;
@@ -328,9 +324,6 @@ public class SplashActivity extends AppCompatActivity {
         AnimatorSet animSetXY = new AnimatorSet();
         animSetXY.playTogether(animX, animY);
         animSetXY.start();
-//        img[i].setX(myImgX[i]);
-//        img[i].setY(myImgY[i]);
-
     }
     public void Down(int i){
         //Down
@@ -451,11 +444,12 @@ public class SplashActivity extends AppCompatActivity {
                     .setPosition(BOTTOM)
                     .calBar(true);
         }
+        bubble.show();
+
 
 //        bubble = new BubbleDialog(c)
 //                .addContentView(LayoutInflater.from(getApplicationContext() ).inflate(R.layout.fragment_bubbledialog, null))
 //                .setClickedView(view).setPosition(BOTTOM).setOffsetY(8).calBar(true);
-        bubble.show();
     }
     //id取得ImgID，work：0回傳寵物屬性、1回傳金額
     private String getTouchID(int id,int work){
