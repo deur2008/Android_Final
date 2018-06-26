@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent homeIntent = new Intent(MainActivity.this, SplashActivity.class);
                 startActivity(homeIntent);
                 finish();
-
             }
         },4000);
         }

@@ -9,8 +9,10 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
     private  int screenWidth;
     private  int screenHeight;
     private Boolean exit = false;
-
+    int[] poringSize = new int[]{100,100,100,100,100,100,100};
 
     private boolean moveState = false;
     private boolean isTouch = false;
@@ -115,25 +117,58 @@ public class SplashActivity extends AppCompatActivity {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            changePos();
+
+                                int sum = 0;
+
+                                for (int i = 1;i < myImageList.length;i++) {
+                                    sum += bookKeeping.GetTypeBalance(i);
+                                }
                             for (int i = 0;i < myImageList.length;i++) {
-                                int size = 100 + bookKeeping.GetTypeBalance(i);
-                                resizeImageView(size, size, img[i]);
+                                if (i == 0 ){
+                                    if(bookKeeping.GetTypeBalance(0)>0) {
+                                        poringSize[i] = 100 + ((bookKeeping.GetTypeBalance(i) - sum) * 500 / bookKeeping.GetTypeBalance(i));
+                                    }
+                                    else{
+                                        poringSize[i] = 100;
+                                    }
+                                }
+                                else{
+                                    if(bookKeeping.GetTypeBalance(0)>0) {
+                                        if(bookKeeping.GetTypeBalance(i)<sum)
+                                        {
+                                            poringSize[i] = 100 + ((bookKeeping.GetTypeBalance(i) * 500 )/ (sum+1 + bookKeeping.GetTypeBalance(0)));
+                                        }
+                                        else if(bookKeeping.GetTypeBalance(i) == sum && bookKeeping.GetTypeBalance(i) != 0)
+                                        {
+                                            poringSize[i] = 100 + 50;
+                                        }
+                                        else {
+                                            poringSize[i] = 100;
+                                        }
+                                    }
+                                    else {
+                                        poringSize[i] = 100 + ((bookKeeping.GetTypeBalance(i) * 500 )/ (sum+1 + bookKeeping.GetTypeBalance(0)));
+                                    }
+
+                                }
+
+                                resizeImageView(poringSize[i], poringSize[i], img[i]);
                             }
+                            changePos();
                         }
                     });
                 }
             },0,50);
         }
         //背景音樂
-        mediaPlayer.start();
-        mediaPlayer.setLooping(true);
-
+            mediaPlayer.start();
+            mediaPlayer.setLooping(true);
         keepAccountsBtn = (ImageButton) findViewById(R.id.keepAccountsButton);
         keepAccountsBtn.setOnClickListener(btnKeepAccountsOnClick);
         recordBtn = (ImageButton) findViewById(R.id.recordButton);
         recordBtn.setOnClickListener(btnRecordOnClick);
     }
+
 
     private void setImg(){
         background= (ImageView)findViewById(R.id.background);
@@ -147,8 +182,7 @@ public class SplashActivity extends AppCompatActivity {
 //            img[i].setX(screenWidthHalf);
 //            img[i].setY(screenHeightHalf);
             //重設ImageView大小
-            int size = 100 + bookKeeping.GetTypeBalance(i);
-            resizeImageView(size,size,img[i]);
+            resizeImageView(poringSize[i],poringSize[i],img[i]);
             //讓ImageView可以讀取gif
             Glide.with(this).load(myImageList[i]).into(img[i]);
             //觸控時監聽
@@ -172,8 +206,6 @@ public class SplashActivity extends AppCompatActivity {
                     touch.start();
                     xCoOrdinate = view.getX() - event.getRawX();
                     yCoOrdinate = view.getY() - event.getRawY();
-                    Log.e("address", String.valueOf(xCoOrdinate) + "~~" + String.valueOf(yCoOrdinate)); // 記錄目前位置
-                    //設定圖像被點擊並顯示氣泡
                     isTouch = true;
                     if( view.getY()>500){
 
@@ -185,9 +217,7 @@ public class SplashActivity extends AppCompatActivity {
                     bubble.show();
                     break;
                 case MotionEvent.ACTION_MOVE:
-
                     view.animate().x(event.getRawX() + xCoOrdinate).y(event.getRawY() + yCoOrdinate).setDuration(0).start();
-                    Log.e("address", String.valueOf(xCoOrdinate) + "~~" + String.valueOf(yCoOrdinate)); // 記錄目前位置
                     break;
                 case MotionEvent.ACTION_UP:
                     isTouch = false;
@@ -218,6 +248,8 @@ public class SplashActivity extends AppCompatActivity {
         }
 
     }
+
+
     //move slime position with random
     public void changePos(){
 
@@ -292,9 +324,6 @@ public class SplashActivity extends AppCompatActivity {
         AnimatorSet animSetXY = new AnimatorSet();
         animSetXY.playTogether(animX, animY);
         animSetXY.start();
-//        img[i].setX(myImgX[i]);
-//        img[i].setY(myImgY[i]);
-
     }
     public void Down(int i){
         //Down
@@ -415,11 +444,12 @@ public class SplashActivity extends AppCompatActivity {
                     .setPosition(BOTTOM)
                     .calBar(true);
         }
+        bubble.show();
+
 
 //        bubble = new BubbleDialog(c)
 //                .addContentView(LayoutInflater.from(getApplicationContext() ).inflate(R.layout.fragment_bubbledialog, null))
 //                .setClickedView(view).setPosition(BOTTOM).setOffsetY(8).calBar(true);
-        bubble.show();
     }
     //id取得ImgID，work：0回傳寵物屬性、1回傳金額
     private String getTouchID(int id,int work){
