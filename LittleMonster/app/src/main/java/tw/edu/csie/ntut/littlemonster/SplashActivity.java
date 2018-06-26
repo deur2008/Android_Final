@@ -9,6 +9,7 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
@@ -48,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
     private  int screenWidth;
     private  int screenHeight;
     private Boolean exit = false;
-    private Boolean isPaused = true;
+    int[] poringSize = new int[]{100,100,100,100,100,100,100};
 
     private boolean moveState = false;
     private boolean isTouch = false;
@@ -116,27 +117,58 @@ public class SplashActivity extends AppCompatActivity {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            changePos();
+
+                                int sum = 0;
+
+                                for (int i = 1;i < myImageList.length;i++) {
+                                    sum += bookKeeping.GetTypeBalance(i);
+                                }
                             for (int i = 0;i < myImageList.length;i++) {
-                                int size = 100 + bookKeeping.GetTypeBalance(i);
-                                resizeImageView(size, size, img[i]);
+                                if (i == 0 ){
+                                    if(bookKeeping.GetTypeBalance(0)>0) {
+                                        poringSize[i] = 100 + ((bookKeeping.GetTypeBalance(i) - sum) * 500 / bookKeeping.GetTypeBalance(i));
+                                    }
+                                    else{
+                                        poringSize[i] = 100;
+                                    }
+                                }
+                                else{
+                                    if(bookKeeping.GetTypeBalance(0)>0) {
+                                        if(bookKeeping.GetTypeBalance(i)<sum)
+                                        {
+                                            poringSize[i] = 100 + ((bookKeeping.GetTypeBalance(i) * 500 )/ (sum+1 + bookKeeping.GetTypeBalance(0)));
+                                        }
+                                        else if(bookKeeping.GetTypeBalance(i) == sum && bookKeeping.GetTypeBalance(i) != 0)
+                                        {
+                                            poringSize[i] = 100 + 50;
+                                        }
+                                        else {
+                                            poringSize[i] = 100;
+                                        }
+                                    }
+                                    else {
+                                        poringSize[i] = 100 + ((bookKeeping.GetTypeBalance(i) * 500 )/ (sum+1 + bookKeeping.GetTypeBalance(0)));
+                                    }
+
+                                }
+
+                                resizeImageView(poringSize[i], poringSize[i], img[i]);
                             }
+                            changePos();
                         }
                     });
                 }
             },0,50);
         }
         //背景音樂
-        if (isPaused == true) {
-            isPaused = false;
             mediaPlayer.start();
             mediaPlayer.setLooping(true);
-        }
         keepAccountsBtn = (ImageButton) findViewById(R.id.keepAccountsButton);
         keepAccountsBtn.setOnClickListener(btnKeepAccountsOnClick);
         recordBtn = (ImageButton) findViewById(R.id.recordButton);
         recordBtn.setOnClickListener(btnRecordOnClick);
     }
+
 
     private void setImg(){
         background= (ImageView)findViewById(R.id.background);
@@ -150,8 +182,7 @@ public class SplashActivity extends AppCompatActivity {
 //            img[i].setX(screenWidthHalf);
 //            img[i].setY(screenHeightHalf);
             //重設ImageView大小
-            int size = 100 + bookKeeping.GetTypeBalance(i);
-            resizeImageView(size,size,img[i]);
+            resizeImageView(poringSize[i],poringSize[i],img[i]);
             //讓ImageView可以讀取gif
             Glide.with(this).load(myImageList[i]).into(img[i]);
             //觸控時監聽
@@ -202,7 +233,6 @@ public class SplashActivity extends AppCompatActivity {
             return true;
         }
     };
-
     public void onBackPressed() {
         if (exit) {
             finish(); // finish activity
@@ -223,24 +253,6 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
-            poring.pause();
-        }
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (!mediaPlayer.isPlaying()) {
-            mediaPlayer.start();
-            poring.start();
-        }
-    }
 
     //move slime position with random
     public void changePos(){

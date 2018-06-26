@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/relativeLayout">
+
     <ImageView
         android:id="@+id/background"
         style="@style/BGImageView50"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         tools:ignore="ContentDescription" />
 
     <ImageButton
@@ -112,7 +113,7 @@
 
     <TextView
         android:id="@+id/dateTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/foodButton"
         android:layout_below="@+id/feedTextView"
@@ -157,21 +158,21 @@
 
     <Spinner
         android:id="@+id/yearSpinner"
-        android:layout_width="107dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/dateTextView"
         android:layout_toEndOf="@+id/amountTextView" />
 
     <Spinner
         android:id="@+id/monthSpinner"
-        android:layout_width="95dp"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/dateTextView"
         android:layout_toEndOf="@+id/yearSpinner" />
 
     <Spinner
         android:id="@+id/dateSpinner"
-        android:layout_width="85dp"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/dateTextView"
         android:layout_toEndOf="@+id/monthSpinner" />
