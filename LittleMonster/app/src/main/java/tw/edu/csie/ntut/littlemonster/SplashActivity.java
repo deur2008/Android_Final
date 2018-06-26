@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
     private  int screenWidth;
     private  int screenHeight;
     private Boolean exit = false;
-
+    private Boolean isPaused = true;
 
     private boolean moveState = false;
     private boolean isTouch = false;
@@ -126,9 +127,11 @@ public class SplashActivity extends AppCompatActivity {
             },0,50);
         }
         //背景音樂
-        mediaPlayer.start();
-        mediaPlayer.setLooping(true);
-
+        if (isPaused == true) {
+            isPaused = false;
+            mediaPlayer.start();
+            mediaPlayer.setLooping(true);
+        }
         keepAccountsBtn = (ImageButton) findViewById(R.id.keepAccountsButton);
         keepAccountsBtn.setOnClickListener(btnKeepAccountsOnClick);
         recordBtn = (ImageButton) findViewById(R.id.recordButton);
@@ -199,6 +202,7 @@ public class SplashActivity extends AppCompatActivity {
             return true;
         }
     };
+
     public void onBackPressed() {
         if (exit) {
             finish(); // finish activity
@@ -218,6 +222,26 @@ public class SplashActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            poring.pause();
+        }
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (!mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+            poring.start();
+        }
+    }
+
     //move slime position with random
     public void changePos(){
 
