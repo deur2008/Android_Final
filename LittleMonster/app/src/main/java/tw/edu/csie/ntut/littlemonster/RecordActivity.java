@@ -28,7 +28,7 @@ public class RecordActivity extends AppCompatActivity {
     private ImageButton lastBtn, nextBtn;
     private Button detailBtn, performanceBtn;
     private Boolean isDetail;
-//    private ImageView background;
+    private ImageView background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class RecordActivity extends AppCompatActivity {
 
     private void SetDetailList() {
         ArrayList<String> data = new ArrayList<String>();
-        data.add("日期                     寵物           花費");
+        data.add("日期                      寵物           花費");
         for (int i = 0; i < bookKeeping.GetData().size(); i++) {
             if (bookKeeping.GetData().get(i).get(0) == year && bookKeeping.GetData().get(i).get(1) == month) {
                 String date = bookKeeping.GetData().get(i).get(0).toString();

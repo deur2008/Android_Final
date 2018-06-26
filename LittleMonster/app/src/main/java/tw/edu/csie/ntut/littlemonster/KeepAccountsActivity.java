@@ -37,7 +37,7 @@ public class KeepAccountsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_keepaccounts);
         now.setToNow();
-
+        feedType = -1;
 //        bookKeeping = new BookKeeping();
         foodBtn = (ImageButton) findViewById(R.id.foodButton);
         foodBtn.setOnClickListener(btnFoodOnClick);
@@ -62,7 +62,6 @@ public class KeepAccountsActivity extends AppCompatActivity {
         backBtn = (ImageButton) findViewById(R.id.backButton);
         backBtn.setOnClickListener(btnBackOnClick);
         setImg();
-        setDates(31);
         String[] years = new String[30];
         for (int i = 0; i < 30; i++) {
             years[i] = Integer.toString(2018 - i);
@@ -176,14 +175,20 @@ public class KeepAccountsActivity extends AppCompatActivity {
             int year = Integer.parseInt(yearSpn.getSelectedItem().toString());
             int month = Integer.parseInt(monthSpn.getSelectedItem().toString());
             int day = Integer.parseInt(daySpn.getSelectedItem().toString());
-            int amount = Integer.parseInt(amountEdit.getText().toString());
-            if (amount <= 0) {
-                Toast.makeText(KeepAccountsActivity.this, "金額輸入錯誤!!", Toast.LENGTH_LONG).show();
-            }
+            if (feedType == -1)
+                Toast.makeText(KeepAccountsActivity.this, "請選擇寵物!!", Toast.LENGTH_LONG).show();
             else {
-                Toast.makeText(KeepAccountsActivity.this, "餵食 " + type[feedType] + " 成功~\n您共花費了 $" + amount, Toast.LENGTH_LONG).show();
-                bookKeeping.AddData(year, month, day, feedType, amount);
-                amountEdit.setText("");
+                if (!amountEdit.getText().toString().matches("")) {
+                    int amount = Integer.parseInt(amountEdit.getText().toString());
+                    if (amount <= 0) {
+                        Toast.makeText(KeepAccountsActivity.this, "金額輸入錯誤!!", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(KeepAccountsActivity.this, "餵食 " + type[feedType] + " 成功~\n您共花費了 $" + amount, Toast.LENGTH_LONG).show();
+                        bookKeeping.AddData(year, month, day, feedType, amount);
+                        amountEdit.setText("");
+                    }
+                } else
+                    Toast.makeText(KeepAccountsActivity.this, "請輸入金額!!", Toast.LENGTH_LONG).show();
             }
         }
     };
@@ -201,9 +206,10 @@ public class KeepAccountsActivity extends AppCompatActivity {
         }
         ArrayAdapter<String> aaDate = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dates);
         daySpn.setAdapter(aaDate);
-        if (max >= now.monthDay) {
+        if (max >= now.monthDay)
             daySpn.setSelection(now.monthDay - 1);
-        }
+        else
+            daySpn.setSelection(0);
     }
 
     private void setImg(){

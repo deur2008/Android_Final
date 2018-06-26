@@ -17,7 +17,7 @@
     <ImageButton
         android:id="@+id/foodButton"
         android:layout_width="wrap_content"
-        android:layout_height="55dp"
+        android:layout_height="80dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="15pt"
@@ -29,7 +29,7 @@
     <ImageButton
         android:id="@+id/clothesButton"
         android:layout_width="wrap_content"
-        android:layout_height="55dp"
+        android:layout_height="80dp"
         android:layout_alignTop="@+id/foodButton"
         android:layout_centerHorizontal="true"
         android:background="@null"
@@ -39,7 +39,7 @@
     <ImageButton
         android:id="@+id/houseButton"
         android:layout_width="wrap_content"
-        android:layout_height="55dp"
+        android:layout_height="80dp"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/foodButton"
         android:layout_marginRight="15pt"
@@ -50,7 +50,7 @@
     <ImageButton
         android:id="@+id/moveButton"
         android:layout_width="wrap_content"
-        android:layout_height="55dp"
+        android:layout_height="80dp"
         android:layout_alignStart="@+id/foodButton"
         android:layout_below="@+id/foodButton"
         android:layout_marginTop="5pt"
@@ -61,7 +61,7 @@
     <ImageButton
         android:id="@+id/amusementButton"
         android:layout_width="wrap_content"
-        android:layout_height="55dp"
+        android:layout_height="80dp"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/moveButton"
         android:layout_marginRight="15pt"
@@ -72,7 +72,7 @@
     <ImageButton
         android:id="@+id/educationButton"
         android:layout_width="wrap_content"
-        android:layout_height="55dp"
+        android:layout_height="80dp"
         android:layout_alignTop="@+id/moveButton"
         android:layout_centerHorizontal="true"
         android:background="@null"
@@ -82,7 +82,7 @@
     <ImageButton
         android:id="@+id/incomeButton"
         android:layout_width="wrap_content"
-        android:layout_height="55dp"
+        android:layout_height="80dp"
         android:layout_alignStart="@+id/foodButton"
         android:layout_below="@+id/moveButton"
         android:layout_marginTop="5pt"
