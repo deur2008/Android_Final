@@ -202,6 +202,8 @@ public class SplashActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (exit) {
             finish(); // finish activity
+            System.exit(0);
+
         } else {
             Toast.makeText(this, "Press Back again to Exit.",
                     Toast.LENGTH_SHORT).show();
