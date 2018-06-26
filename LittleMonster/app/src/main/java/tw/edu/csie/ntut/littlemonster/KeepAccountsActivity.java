@@ -27,7 +27,7 @@ public class KeepAccountsActivity extends AppCompatActivity {
     private TextView feedTxt;
     private Spinner yearSpn, monthSpn, daySpn;
     private EditText amountEdit;
-    private Button confirmBtn;
+    private ImageButton confirmBtn,backBtn;
     private int feedType;
 //    private BookKeeping bookKeeping;
     private Time now = new Time();
@@ -58,8 +58,9 @@ public class KeepAccountsActivity extends AppCompatActivity {
         monthSpn = (Spinner) findViewById(R.id.monthSpinner);
         daySpn = (Spinner) findViewById(R.id.dateSpinner);
         amountEdit = (EditText) findViewById(R.id.amountEditText);
-        confirmBtn = (Button) findViewById(R.id.confirmButton);
-        confirmBtn.setOnClickListener(btnConfirmOnClick);
+        confirmBtn = (ImageButton) findViewById(R.id.confirmButton);
+        backBtn = (ImageButton) findViewById(R.id.backButton);
+        backBtn.setOnClickListener(btnBackOnClick);
         setImg();
         setDates(31);
         String[] years = new String[30];
@@ -184,6 +185,12 @@ public class KeepAccountsActivity extends AppCompatActivity {
                 bookKeeping.AddData(year, month, day, feedType, amount);
                 amountEdit.setText("");
             }
+        }
+    };
+
+    private View.OnClickListener btnBackOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            onBackPressed();
         }
     };
 

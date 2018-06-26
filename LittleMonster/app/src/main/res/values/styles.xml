@@ -17,6 +17,11 @@
         <item name="android:scaleType">fitXY</item>
         <!-- <item name="android:src">@drawable/background</item> -->
     </style>
+    <style name="BGImageView30">
+        <item name="android:alpha">0.3</item>
+        <item name="android:scaleType">fitXY</item>
+        <!-- <item name="android:src">@drawable/background</item> -->
+    </style>
     <style name="BGImageView50">
         <item name="android:alpha">0.5</item>
         <item name="android:scaleType">fitXY</item>

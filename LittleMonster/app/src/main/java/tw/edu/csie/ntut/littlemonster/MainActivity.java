@@ -55,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
     //Screen Size
     private  int screenWidth;
     private  int screenHeight;
-    private  int screenWidthHalf;
-    private  int screenHeightHalf;
 
 
     private boolean moveState = false;
@@ -116,8 +114,6 @@ public class MainActivity extends AppCompatActivity {
         disp.getSize(size);
         screenWidth = size.x;
         screenHeight = size.y;
-        screenWidthHalf = screenWidth/2;
-        screenHeightHalf = screenHeight/2;
 
         //30毫秒移動
         if(!isTouch){
@@ -178,10 +174,10 @@ public class MainActivity extends AppCompatActivity {
         public boolean onTouch(View view, MotionEvent event) {
             Context c = view.getContext();
             int touchID;
+            touchID = view.getId();
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_DOWN:
                     touch.start();
-                    touchID = view.getId();
                     xCoOrdinate = view.getX() - event.getRawX();
                     yCoOrdinate = view.getY() - event.getRawY();
                     Log.e("address", String.valueOf(xCoOrdinate) + "~~" + String.valueOf(yCoOrdinate)); // 記錄目前位置
@@ -197,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                     bubble.show();
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    bubble.hide();
+
                     view.animate().x(event.getRawX() + xCoOrdinate).y(event.getRawY() + yCoOrdinate).setDuration(0).start();
                     Log.e("address", String.valueOf(xCoOrdinate) + "~~" + String.valueOf(yCoOrdinate)); // 記錄目前位置
                     break;
@@ -363,6 +359,7 @@ public class MainActivity extends AppCompatActivity {
             Intent it = new Intent();
             it.setClass(MainActivity.this, KeepAccountsActivity.class);
             startActivity(it);
+            keepAccountsBtn.setBackgroundResource(R.drawable.add_clk);
         }
     };
 
@@ -371,6 +368,8 @@ public class MainActivity extends AppCompatActivity {
             Intent it = new Intent();
             it.setClass(MainActivity.this, RecordActivity.class);
             startActivity(it);
+            recordBtn.setBackgroundResource(R.drawable.history_clk);
+
         }
     };
 

@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <ImageView
+        android:id="@+id/background"
+        style="@style/BGImageView30"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        tools:ignore="ContentDescription" />
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="83dp"
         android:layout_marginTop="10pt"
@@ -13,10 +26,12 @@
 
         <ImageButton
             android:id="@+id/lastButton"
-            android:layout_width="wrap_content"
+            android:layout_width="35dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/arrow_up_float" />
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/left" />
 
         <TextView
             android:id="@+id/monthText"
@@ -29,10 +44,12 @@
 
         <ImageButton
             android:id="@+id/nextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/arrow_down_float" />
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/right" />
     </LinearLayout>
 
     <LinearLayout
@@ -61,3 +78,4 @@
         android:layout_marginTop="10pt" />
 
 </LinearLayout>
+</RelativeLayout>

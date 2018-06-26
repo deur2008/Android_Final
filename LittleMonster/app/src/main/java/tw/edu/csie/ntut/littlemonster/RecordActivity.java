@@ -20,6 +20,7 @@ import static tw.edu.csie.ntut.littlemonster.MainActivity.type;
 
 public class RecordActivity extends AppCompatActivity {
 
+    private ImageView background;
     private ListView mList;
     private TextView monthTxt;
     private int year, month;
@@ -51,6 +52,7 @@ public class RecordActivity extends AppCompatActivity {
         mList = (ListView)findViewById(R.id.listData);
         SetMonth(now.year, now.month + 1);
         SetDetailList();
+        setImg();
     }
 
     private void SetMonth(int setYear, int setMonth) {
@@ -153,4 +155,10 @@ public class RecordActivity extends AppCompatActivity {
         detailBtn.setEnabled(!isDetail);
         performanceBtn.setEnabled(isDetail);
     }
+
+
+    private void setImg(){
+        background= (ImageView)findViewById(R.id.background);
+        background.setImageResource(R.drawable.background);
+        Glide.with(this).load(R.drawable.background).into(background);}
 }

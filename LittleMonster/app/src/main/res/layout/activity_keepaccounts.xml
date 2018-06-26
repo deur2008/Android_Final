@@ -132,14 +132,27 @@
         android:ems="10"
         android:inputType="none|number|numberSigned" />
 
-    <Button
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="121dp"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="46dp"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/back"
+        android:textSize="10pt" />
+
+    <ImageButton
         android:id="@+id/confirmButton"
         android:layout_width="121dp"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
+        android:layout_alignEnd="@+id/houseButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10pt"
-        android:text="確定"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/ok"
         android:textSize="10pt" />
 
     <Spinner
